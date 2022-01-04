@@ -20,7 +20,7 @@ my diary
 	</tr>
 	<c:forEach items="${dList}" var="d">
 	<tr>
-		<td>${d.title }</td>
+		<td><a href="UDS?diaryCode=${d.diaryCode }">${d.title }</a></td>
 		<td>${d.userid }</td>
 		<td>${d.diaryDate }</td>
 	</tr>

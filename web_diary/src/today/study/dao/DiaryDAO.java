@@ -1,6 +1,7 @@
 package today.study.dao;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class DiaryDAO {
 	public int insertDiary(DiaryVO dVo) {
 		int result =-1;
 		
-		String sql = "INSERT INTO DIARY_BOARD VALUES ( ? , ? , ? , SYSDATE)";
+		String sql = "INSERT INTO DIARY_BOARD VALUES ( DIARY_SEQ.NEXTVAL , ? , ? , ? , SYSDATE)";
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -92,17 +93,12 @@ public class DiaryDAO {
 			while(rs.next()) {
 				dVo = new DiaryVO();
 				
-				System.out.println("시작");
-				
+				dVo.setDiaryCode(rs.getInt("diaryCode"));
 				dVo.setUserid(rs.getString("userid"));
 				dVo.setTitle(rs.getString("title"));
 				dVo.setContent(rs.getString("content"));
 				dVo.setDiaryDate(rs.getDate("diaryDate").toString());
 				
-				System.out.println("userid : " + rs.getString("userid"));
-				System.out.println("title : " + rs.getString("title"));
-				System.out.println("content : " + rs.getString("content"));
-				System.out.println("diaryDate : " + (rs.getDate("diaryDate").toString()));
 				dList.add(dVo);
 				
 			}
@@ -120,6 +116,111 @@ public class DiaryDAO {
 		
 		return dList;
 	}
+	
+	
+	public void updateDiary(DiaryVO dVo) {
+		
+		String sql = "UPDATE DIARY_BOARD SET TITLE = ? , CONTENT = ? WHERE DIARYCODE = ?";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		
+		try {
+			System.out.println("update try문 시작");
+			conn = getConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, dVo.getTitle());
+			psmt.setString(2, dVo.getContent());
+			psmt.setInt(3, dVo.getDiaryCode());
+			
+			psmt.executeUpdate();
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(psmt!=null)psmt.close();
+				if(conn!=null)conn.close();
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public DiaryVO selectDiaryByCode(int diaryCode) {
+		DiaryVO dVo = null;
+		
+		String sql = "SELECT * FROM DIARY_BOARD WHERE DIARYCODE = ?";
+	
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, diaryCode);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				dVo = new DiaryVO();
+				
+				dVo.setDiaryCode(rs.getInt("diaryCode"));
+				dVo.setUserid(rs.getString("userid"));
+				dVo.setTitle(rs.getString("title"));
+				dVo.setContent(rs.getString("content"));
+				dVo.setDiaryDate(rs.getDate("diaryDate").toString());
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(psmt!=null)psmt.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+			
+		return dVo;
+	}
+	
+	public void deleteDiaryByCode(int diaryCode) {
+		
+		String sql = "DELETE FROM DIARY_BOARD WHERE DIARYCODE = ?";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		
+		try {
+			System.out.println("delete try문 시작");
+			conn = getConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, diaryCode);
+			
+			psmt.executeUpdate();
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(psmt!=null)psmt.close();
+				if(conn!=null)conn.close();
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+		
+		
 
 
 }
