@@ -70,12 +70,18 @@
 
         $('#checkUpdatePwd'+code).toggle();
         $('#udtconfirm'+code).toggle();
+        
+        $('#checkDelPwd'+code).hide();
+        $('#delconfirm'+code).hide()
     }
 
     function showDelPwd(code){
         console.log(code);
         $('#checkDelPwd'+code).toggle();
         $('#delconfirm'+code).toggle();
+        
+        $('#checkUpdatePwd'+code).hide();
+        $('#udtconfirm'+code).hide();
     }
     
     // 확인버튼(수정버튼 눌러서 나온) 눌렀을때
@@ -195,10 +201,9 @@
             let updateConfirmBtn = document.createElement('input');
             updateConfirmBtn.setAttribute('type','button');
             updateConfirmBtn.setAttribute('id', 'udtconfirm'+wordList[i].c_code);
-            updateConfirmBtn.setAttribute('name',wordList[i].c_code);
             updateConfirmBtn.setAttribute('value','확인');
             updateConfirmBtn.setAttribute('style','display:none');
-            updateConfirmBtn.setAttribute('onclick','updateReple(this.name)');
+            updateConfirmBtn.setAttribute('onclick','updateReple('+wordList[i].c_code+')');
 
             let deletepwdtext = document.createElement('input');
             deletepwdtext.setAttribute('type','password');
@@ -209,24 +214,21 @@
             let deleteConfirmBtn = document.createElement('input');
             deleteConfirmBtn.setAttribute('type','button');
             deleteConfirmBtn.setAttribute('id', 'delconfirm'+wordList[i].c_code);
-            deleteConfirmBtn.setAttribute('name',wordList[i].c_code);
             deleteConfirmBtn.setAttribute('value','확인');
             deleteConfirmBtn.setAttribute('style','display:none');
-            deleteConfirmBtn.setAttribute('onclick','deleteReple(this.name)');
+            deleteConfirmBtn.setAttribute('onclick','deleteReple(' + wordList[i].c_code + ')');
 
             let updateBtn = document.createElement('input');
             updateBtn.setAttribute('type','button');
             updateBtn.setAttribute('id','update'+wordList[i].c_code);
-            updateBtn.setAttribute('name',wordList[i].c_code);
             updateBtn.setAttribute('value','수정');
-            updateBtn.setAttribute('onclick','showUpdatePwd(this.name)');
+            updateBtn.setAttribute('onclick','showUpdatePwd('+wordList[i].c_code+')');
             
             let delBtn = document.createElement('input');
             delBtn.setAttribute('type','button');
             delBtn.setAttribute('id','del'+wordList[i].c_code);
-            delBtn.setAttribute('name',wordList[i].c_code);
             delBtn.setAttribute('value','삭제');
-            delBtn.setAttribute('onclick','showDelPwd(this.name)');
+            delBtn.setAttribute('onclick','showDelPwd('+wordList[i].c_code+')');
             
             let textarea = document.createElement('textarea');
             textarea.setAttribute('id','replely'+wordList[i].c_code);
