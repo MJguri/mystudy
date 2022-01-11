@@ -1,0 +1,39 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+}
+
+table{
+	width:500px;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.banner {
+	margin: 0 auto;
+    width: 800px;
+    height :300px;
+    background-image: url(banner_logo.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.8;
+}
+.diarybody{
+	margin: 0 auto;
+	display: flex;
+ 	justify-content: flex-end;
+	width:510px;
+}
+.pagingbody{
+	margin: 0 auto;
+	display: flex;
+ 	justify-content: space-between;
+	width:350px;
+}
+.scrollbody{
+	margin: 0 auto;
+	/* display: flex;
+ 	justify-content: space-between; */
+	width:350px;
+}
+
