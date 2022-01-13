@@ -5,10 +5,14 @@ import com.mjguri.controller.action.CurriculumListAction;
 import com.mjguri.controller.action.DeleteCurriculumAction;
 import com.mjguri.controller.action.InsertCurriculumAction;
 import com.mjguri.controller.action.InsertCurriculumFormAction;
+import com.mjguri.controller.action.InsertLecturerAction;
+import com.mjguri.controller.action.InsertLecturerForm;
 import com.mjguri.controller.action.LecturerListAction;
 import com.mjguri.controller.action.ReadCurriculumFormAction;
 import com.mjguri.controller.action.UpdateCurriculumAction;
 import com.mjguri.controller.action.UpdateCurriculumFormAction;
+import com.mjguri.controller.action.UpdateLecturerAction;
+import com.mjguri.controller.action.UpdateLecturerView;
 
 public class ActionFactory {
 	private ActionFactory() {}
@@ -36,6 +40,14 @@ public class ActionFactory {
 			action = new UpdateCurriculumAction();
 		}else if(command.equals("lecturerView")) {
 			action = new LecturerListAction();
+		}else if(command.equals("insertLecturerForm")) {
+			action = new InsertLecturerForm();
+		}else if(command.equals("insertLecturerAction")) {
+			action = new InsertLecturerAction();
+		}else if(command.equals("updateLecturerView")) {
+			action = new UpdateLecturerView();
+		}else if(command.equals("updateLecturerAction")) {
+			action = new UpdateLecturerAction();
 		}
 		
 		return action;

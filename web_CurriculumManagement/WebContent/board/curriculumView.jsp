@@ -20,11 +20,11 @@
             </tr>
             <tr>
                 <th>과목 명</th>
-                <td><input type="text" id="name" name="name" value=" ${cVo.name}"  readonly></td>
+                <td><input type="text" id="name" name="name" value="${cVo.name}"  readonly></td>
             </tr>
             <tr>
                 <th>담당 강사</th>
-                <td><input type="text" id="lecturer" name="lecturer" value="${cVo.lecturer}"  readonly> </td>
+                <td><input type="text" id="lecturer" name="lecturer" value="${lecName}"  readonly> </td>
             </tr>
             <tr>
                 <th>학점</th>
@@ -32,7 +32,7 @@
             </tr>
             <tr>
                 <th>요일</th>
-                <td><input type="text" id="week" name="week" value="${cVo.week}"  readonly> </td>
+                <td><input type="text" id="week" name="week" value="${cVo.weekKR}"  readonly> </td>
             </tr>
             <tr>
                 <th>시작</th>

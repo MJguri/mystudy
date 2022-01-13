@@ -24,6 +24,8 @@ public class CurriManageDAO {
 	public List<CurriculumListVO> selectCurriculumList(){
 		List<CurriculumListVO> list = new ArrayList<>();
 		
+		String[] yoil = {"월", "화", "수", "목", "금", "토"};
+		
 		// ID 기준 내림차순 정렬 
 		String sql = "SELECT A.ID, A.NAME, A.CREDIT, B.NAME AS LECTURER, A.WEEK FROM COURSE_TBL A JOIN LECTURER_TBL B ON (A.LECTURER = B.IDX) ORDER BY ID DESC";
 		
@@ -43,7 +45,9 @@ public class CurriManageDAO {
 				clVO.setName(rs.getString("name"));
 				clVO.setCredit(rs.getInt("credit"));
 				clVO.setLecturer(rs.getString("lecturer"));
-				clVO.setWeek(rs.getInt("week"));
+				//clVO.setWeek(rs.getInt("week"));
+				clVO.setWeekKR(yoil[rs.getInt("week")-1]); 
+				
 				
 				list.add(clVO);
 			}
@@ -145,6 +149,7 @@ public class CurriManageDAO {
 	
 	public CourseVO selectBoardById(String id) {
 		CourseVO cVo = null;
+		String[] yoil = {"월", "화", "수", "목", "금", "토"};
 		
 		String sql = "SELECT * FROM COURSE_TBL WHERE id= ?";
 		
@@ -166,6 +171,7 @@ public class CurriManageDAO {
 				cVo.setCredit(rs.getInt("credit"));
 				cVo.setLecturer(rs.getInt("lecturer"));
 				cVo.setWeek(rs.getInt("week"));
+				cVo.setWeekKR((yoil[rs.getInt("week")-1])); 
 				cVo.setStarthour(rs.getInt("start_hour"));
 				cVo.setEndhour(rs.getInt("end_hour"));
 			}
@@ -226,6 +232,38 @@ public class CurriManageDAO {
 		}finally {
 			DBManager.close(conn, psmt);
 		}
+	}
+	
+	public List<String> selectCurriNameById(int id) {
+		List<String> cList = new ArrayList<>();
+		
+		String sql = "SELECT NAME FROM COURSE_TBL WHERE LECTURER = ?";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, id);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				cList.add(rs.getString("name"));
+			}
+			
+			if(cList.size()==0) {
+				cList.add("없음");
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, psmt, rs);
+		}
+		return cList;
 	}
 	
 	

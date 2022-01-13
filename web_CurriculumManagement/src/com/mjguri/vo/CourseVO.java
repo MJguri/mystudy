@@ -6,8 +6,10 @@ public class CourseVO {
 	private int credit;
 	private int lecturer;
 	private int week;
+	private String weekKR;
 	private int starthour;
 	private int endhour;
+	
 	
 	public String getId() {
 		return id;
@@ -38,6 +40,12 @@ public class CourseVO {
 	}
 	public void setWeek(int week) {
 		this.week = week;
+	}
+	public String getWeekKR() {
+		return weekKR;
+	}
+	public void setWeekKR(String weekKR) {
+		this.weekKR = weekKR;
 	}
 	public int getStarthour() {
 		return starthour;

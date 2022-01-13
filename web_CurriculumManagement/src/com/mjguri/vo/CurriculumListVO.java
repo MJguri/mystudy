@@ -6,7 +6,15 @@ public class CurriculumListVO {
 	private int credit;
 	private String lecturer;
 	private int week;
+	private String weekKR;
 	
+	
+	public String getWeekKR() {
+		return weekKR;
+	}
+	public void setWeekKR(String weekKR) {
+		this.weekKR = weekKR;
+	}
 	public String getId() {
 		return id;
 	}

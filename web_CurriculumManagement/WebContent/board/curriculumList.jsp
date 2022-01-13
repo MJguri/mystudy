@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,7 @@
 <body>
     <header class='headerFooter'>교과목 관리 사이트</header>
     <section>
-        <div class='total'> 총 ${totalCnt } 개의 과목이 있습니다.</div>
+        <div class='total'> 총 ${totalCnt } 개의 과목이 있습니다. ${fn:length(curriList)}</div>
         <div class='lecturerBtn'> <input type="button" value="강사보기" onclick="location.href='CMS?command=lecturerView'"> </div>
         
         <table>
@@ -31,7 +32,7 @@
 						<td class="tdcenter"><a href="CMS?command=readCurri_List&id=${cL.id}">${cL.name}</a></td>
 						<td class="tdcenter">${cL.credit}</td>
 						<td class="tdcenter">${cL.lecturer}</td>
-						<td class="tdcenter">${cL.week}</td>
+						<td class="tdcenter">${cL.weekKR}</td>
 					</tr>
 				</c:forEach>
             </tbody>

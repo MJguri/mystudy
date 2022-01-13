@@ -23,7 +23,7 @@
 	            </tr>
 	            <tr>
 	                <th>과목 명</th>
-	                <td><input type="text" id="name" name="name" value=" ${cVo.name}"></td>
+	                <td><input type="text" id="name" name="name" value="${cVo.name}"></td>
 	            </tr>
 	            <tr>
 	                <th>담당 강사</th>
@@ -31,7 +31,7 @@
 	                	<!-- <input type="text" id="lecturer" name="lecturer" value="${cVo.lecturer}"> -->
 	                	<select id="lecturer" name="lecturer">
                             <c:forEach var="lecL" items="${lecList}">
-                                <option value="${lecL.idx }"> ${lecL.name }</option>
+                                <option value="${lecL.idx }"<c:if test="${cVo.lecturer == lecL.idx}"> selected </c:if> > ${lecL.name }</option>
                             </c:forEach>
                         </select> 
 	                </td>
@@ -43,12 +43,12 @@
 	            <tr>
 	                <th>요일</th>
 	                <td>
-                        <input type="radio" id="week" name="week" value="1">월 
-                        <input type="radio" id="week" name="week" value="2">화 
-                        <input type="radio" id="week" name="week" value="3">수 
-                        <input type="radio" id="week" name="week" value="4">목 
-                        <input type="radio" id="week" name="week" value="5">금 
-                        <input type="radio" id="week" name="week" value="6">토 
+                        <input type="radio" id="week" name="week" value="1"<c:if test="${cVo.week == 1}"> checked </c:if>>월
+                        <input type="radio" id="week" name="week" value="2"<c:if test="${cVo.week == 2}"> checked </c:if>>화 
+                        <input type="radio" id="week" name="week" value="3"<c:if test="${cVo.week == 3}"> checked </c:if>>수 
+                        <input type="radio" id="week" name="week" value="4"<c:if test="${cVo.week == 4}"> checked </c:if>>목 
+                        <input type="radio" id="week" name="week" value="5"<c:if test="${cVo.week == 5}"> checked </c:if>>금 
+                        <input type="radio" id="week" name="week" value="6"<c:if test="${cVo.week == 6}"> checked </c:if>>토 
                     </td>
 	            </tr>
 	            <tr>

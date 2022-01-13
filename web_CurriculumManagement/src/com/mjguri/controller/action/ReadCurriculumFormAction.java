@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.mjguri.dao.CurriManageDAO;
+import com.mjguri.dao.LecturerDAO;
 import com.mjguri.vo.CourseVO;
 
 
@@ -19,12 +20,16 @@ public class ReadCurriculumFormAction implements Action {
 		String url = "board/curriculumView.jsp";
 		
 		String id = request.getParameter("id");
-		System.out.println("받아온 id : "+ id);
 		
 		CurriManageDAO dao = CurriManageDAO.getInstance();
+		LecturerDAO ldao = LecturerDAO.getInstance();
 		
 		CourseVO cVo = dao.selectBoardById(id);
+		String lecName = ldao.selectLecturerNameByIdx(Integer.parseInt(id));
 		
+		System.out.println("lecName : " + lecName);
+		
+		request.setAttribute("lecName", lecName);
 		request.setAttribute("cVo", cVo);
 
 		request.getRequestDispatcher(url).forward(request, response);
