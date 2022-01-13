@@ -23,9 +23,13 @@
    * 로그인시 세션에 정보 저장
 * 2022_01_11 web_diary 프로젝트 
    * 다이어리 게시판 페이징 기능 구현
-* 2022_01_12 web_CurriculumManagement 프로젝트
+* 2022_01_12 web_CurriculumManagement 프로젝트 추가
    * 교과목 관리 시스템 프로젝트 시작 
    * VO 객체 세팅
    * DAO 객체 싱글턴 패턴으로 제적
    * 교과목 CRUD 기능 구현 
+* 2022_01_13 web_CurriculumManagement 프로젝트 완료
+   * 강사 등록, 수정, 상세보기 기능 구현 
+   * 요일코드를 한글로 변환하여 view단에 보내기
+   * 강사코드를 한글로 변환하여 view단에 보내기
    
