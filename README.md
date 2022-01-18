@@ -34,4 +34,11 @@
    * 강사코드를 한글로 변환하여 view단에 보내기
 * 2022_01_17 spring 공부
    * IoC, DI 개념  
+* 2022_01_18 spring 공부
+   * @autowired 애노테이션 적용 순서
+   * @qualifier
+   * @Autowired 와 @Resource 차이
+   * 자동주입과 명시적 주입 우선순위
+   * Java파일로 bean객체 생성하기
+   * @Configuration, @Bean
    
