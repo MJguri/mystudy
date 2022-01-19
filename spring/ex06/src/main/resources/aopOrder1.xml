@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+
+	<!-- 공통의 기능을 제공할 클래스를 빈으로 등록 -->
+	<bean id="exeTimeAspect" class="spring.aspect.ExeTimeAspect"></bean>
+	<bean id="cacheAspect" class="spring.aspect.CacheAspect"></bean>
+
+	<!-- Aspect 설정 : advice를 어떤 PointCut에 적용할 지를 설정 -->
+	<aop:config proxy-target-class="true">
+		<aop:aspect id="measureAspect" ref="exeTimeAspect" order="0">
+			<!-- 1. 누구(어떤 핵심기능)에게  -->
+			<aop:pointcut 
+				expression="execution(public * spring.calc..*(..))" 
+				id="publicMehtod"/>
+			<!-- 2. 적용가능 지점 -->
+			<aop:around method="method" pointcut-ref="publicMehtod"/>
+		</aop:aspect>
+		
+		<aop:aspect id="cacheAspect" ref="cacheAspect" order="1">
+			<!-- 1. 누구(어떤 핵심기능)에게  -->
+			<aop:pointcut 
+				expression="execution(public * spring.calc..*(..))" 
+				id="cacheMehtod"/>
+			<!-- 2. 적용가능 지점 -->
+			<aop:around method="execute" pointcut-ref="cacheMehtod"/>
+		</aop:aspect>
+	</aop:config>
+
+	<!-- 빈객체 : 핵심기능을 담당할 객체 -->
+	<bean id="impe" class="spring.calc.ImpeCalculator"></bean>
+	
+	<bean id="rec" class="spring.calc.RecCalculator"></bean>
+
+
+</beans>

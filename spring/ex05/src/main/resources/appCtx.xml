@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean class="spring.bean.Client" id="client">
+		<property name="host" value="웹서버"></property>
+	</bean>
+	
+	<bean class="spring.bean.Client2" id="client2" init-method="connect" destroy-method="close">
+		<property name="host" value="웹서버2"></property>
+	</bean>
+	
+	<!--  get Bean 할때마다 인스턴스를 새로 생성 -->
+	<bean class="spring.bean.Client3" id="client3" scope="prototype">
+		<property name="host" value="프로토서버"></property>
+	</bean>
+
+</beans>
