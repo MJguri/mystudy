@@ -41,4 +41,8 @@
    * 자동주입과 명시적 주입 우선순위
    * Java파일로 bean객체 생성하기
    * @Configuration, @Bean
+* 2022_01_19 spring 공부
+   * Bean 객체의 라이프 사이클과 범위
+   * AOP개념 공부
+   * 프록시와 AOP
    
