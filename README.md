@@ -45,4 +45,7 @@
    * Bean 객체의 라이프 사이클과 범위
    * AOP개념 공부
    * 프록시와 AOP
+* 2022_01_20 spring 공부
+   * 스프링과 DB연결
+   * jdbcTemplate 개념과 사용법
    
