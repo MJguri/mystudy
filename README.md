@@ -48,4 +48,9 @@
 * 2022_01_20 spring 공부
    * 스프링과 DB연결
    * jdbcTemplate 개념과 사용법
+* 2022_01_21 java 공부
+   * Stream개념 기본예제
+   * 중간연산 .filter, .mapToObject, .map
+   * 최종연산 .sum, .reduce
+   * IOStream - bufferedI/O Stream
    
