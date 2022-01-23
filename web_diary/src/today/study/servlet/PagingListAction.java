@@ -20,6 +20,9 @@ public class PagingListAction implements Action {
 		String _section = request.getParameter("section");
 		String _pageNum = request.getParameter("pageNum");
 		
+		System.out.println("section : " + _section);
+		System.out.println("pageNum : " + _pageNum);
+		
 		int section = Integer.parseInt((_section==null)?"1":_section);
 		int pageNum = Integer.parseInt((_pageNum==null)?"1":_pageNum);
 		

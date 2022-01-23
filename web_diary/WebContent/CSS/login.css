@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 body{
     text-align: center;  
 }
@@ -22,21 +24,39 @@ header {
     background-position: center;
 }
 
-
-#join_line {
-    background-image: url(../CSS/image/join_line.png);
+#longin_line {
+	background-image: url(../CSS/image/login_line.png);
 	background-repeat: no-repeat;
 	width: 100%;
-	height: 100px;
+	height: 200px;
 	margin: 0px auto;
 	background-position: center;
 }
 
 table{
+    text-align: center;
     margin: 0px auto;
     width: 400px;
-    text-align: left;
+
 }
+
+.b3_butoon {
+    color: #000000;
+    border: #000000 solid 1px;
+    padding: 5px;
+    background-color: #ad98ad;
+}
+
+.b3_butoon:hover {
+    color: #ffffff;
+    background-color: #000000;
+}
+
+
+.button_base:hover {
+    cursor: pointer;
+}
+
 
 .button_base {
     margin: 0;
@@ -44,26 +64,11 @@ table{
     font-size: 13px;
     position: relative;
     top: 50%;
-    width: 170px;
-    height: 40px;
+    left: 50%;
+    margin-left: -60px;
+    width: 100px;
+    height: 50px;
     text-align: center;
     box-sizing: border-box;
     cursor: default;
 }
-
-.button_base:hover {
-    cursor: pointer;
-}
-
-
-.b2_butoon {
-    color: #000000;
-    border: #000000 solid 1px;
-    padding: 10px;
-    background-color: #f2cbab;
-}
-
- .b2_butoon:hover {
-        color: #ffffff;
-        background-color: #000000;
-    }

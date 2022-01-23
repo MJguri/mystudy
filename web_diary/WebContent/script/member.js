@@ -47,7 +47,7 @@ function idCheck(){
 		return false;
 	}
 	
-	let url = "/idCheck.do?userid="+document.frm.userid.value;
+	let url = "idCheck.do?userid="+document.frm.userid.value;
 	
 	console.log(url);
 	
@@ -62,6 +62,11 @@ function idOk(){
 	
 	self.close(); //현재 새로 열린 창 닫기
 }
+
+function go_create(){
+	location.href="member/create_diary.jsp";
+}
+
 
 
 

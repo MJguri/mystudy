@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet {
 			
 			session.setAttribute("loginUser", mVo);
 			
-			url = "DLS?command=paging";  
+			url = "DLS";  
 		}else if(result == 0) { //비밀번호가 틀린 경우
 			request.setAttribute("message", "비밀번호가 맞지 않습니다.");
 		}else if(result == -1) {// 아이디가 없는 경우
