@@ -53,4 +53,8 @@
    * 중간연산 .filter, .mapToObject, .map
    * 최종연산 .sum, .reduce
    * IOStream - bufferedI/O Stream
+* 2022_01_23 web_diary project
+   * CSS - trigger를 이용한 typing 효과 추가
+   * 무한스크롤 기능 추가
+   * 페이징 기능 추가 
    
