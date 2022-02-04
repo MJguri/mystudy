@@ -22,7 +22,7 @@ public class AuthService {
 			throw new IdPasswordNotMatchingException();
 		}
 		
-		return new AuthInfo(m.getMemberId(), m.getMemberName(), m.getMemberEmail());
+		return new AuthInfo(m.getMemberId(), m.getMemberName(), m.getMemberNum());
 	}
 	
 

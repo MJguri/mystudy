@@ -43,11 +43,28 @@ public class MemberDAO {
 		}
 	};
 	
+	//members테이블 정보 조회
+	public List<MemberVO> selectAll() {
+		String sql = "SELECT * FROM MEMBERS";
+		
+		List<MemberVO> list = jdbcTemplate.query(sql, rowMapper);
+		
+		return list;
+	}
+	
 	// id로 정보조회하기 
 	public MemberVO selectById(String memberId) {
 		String sql = "SELECT * FROM members WHERE memberId=?"; 
 
 		List<MemberVO> result = jdbcTemplate.query(sql,rowMapper,memberId);
+		
+		return result.isEmpty()?null:result.get(0);
+	}
+	
+	public MemberVO selectByNum(Long memberNum) {
+		String sql = "SELECT * FROM MEMBERS WHERE MEMBERNUM=?";
+		
+		List<MemberVO> result = jdbcTemplate.query(sql, rowMapper, memberNum);
 		
 		return result.isEmpty()?null:result.get(0);
 	}

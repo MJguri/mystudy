@@ -10,7 +10,8 @@ import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
-import mj.guri.vo.BoardsListVO;
+import mj.guri.vo.QnaRegiVO;
+import mj.guri.vo.QnaVO;
 
 
 public class QnaDAO {
@@ -22,11 +23,11 @@ public class QnaDAO {
 	}
 
 	// 공통의 RowMapper 를 꺼내 봅시다.
-	private RowMapper<BoardsListVO> rowMapper =
-			new RowMapper<BoardsListVO>() {
+	private RowMapper<QnaVO> rowMapper =
+			new RowMapper<QnaVO>() {
 					@Override
-					public BoardsListVO mapRow(ResultSet rs, int rowNum) throws SQLException {
-						BoardsListVO blVo = new BoardsListVO(
+					public QnaVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+						QnaVO blVo = new QnaVO(
 								rs.getInt("qnaBoardNum"),
 								rs.getString("qnaBoardTitle"),
 								rs.getString("memberName"),
@@ -37,9 +38,9 @@ public class QnaDAO {
 					}
 			};
 	
-	public List<BoardsListVO> selectQnaList(){
+	public List<QnaVO> selectQnaList(){
 		String sql = "SELECT A.QNABOARDNUM, A.QNABOARDTITLE, B.MEMBERNAME, A.QNABOARDREGDATE, A.QNABOARDCOUNT FROM BOARDS A JOIN  MEMBERS B ON (A.MEMBERNUM = B.MEMBERNUM) ORDER BY A.QNABOARDNUM DESC"; 				  
-		List<BoardsListVO> result = jdbcTemplate.query(sql,rowMapper);
+		List<QnaVO> result = jdbcTemplate.query(sql,rowMapper);
 		return result;
 	}
 	
@@ -53,13 +54,29 @@ public class QnaDAO {
 	}
 	
 	//페이징 SELECT 쿼리 
-	public List<BoardsListVO> selectTargetBoard(int section, int pageNum){
+	public List<QnaVO> selectTargetBoard(int section, int pageNum){
 		
 		String sql = "SELECT * FROM (SELECT ROWNUM AS RN, QNABOARDNUM, QNABOARDTITLE, MEMBERNAME, QNABOARDREGDATE, QNABOARDCOUNT FROM (SELECT A.QNABOARDNUM, A.QNABOARDTITLE, B.MEMBERNAME, A.QNABOARDREGDATE, A.QNABOARDCOUNT FROM BOARDS A JOIN MEMBERS B ON (A.MEMBERNUM = B.MEMBERNUM) ORDER BY A.QNABOARDNUM DESC)) WHERE RN BETWEEN (?-1)*100 + (?-1)*10 +1 and (?-1)*100 + (?) * 10";
 		
-		List<BoardsListVO> list = jdbcTemplate.query(sql, rowMapper, section, pageNum, section, pageNum);
+		List<QnaVO> list = jdbcTemplate.query(sql, rowMapper, section, pageNum, section, pageNum);
 			
 		return list;
+	}
+	
+	public void insertQna(QnaRegiVO qVo, int memberNum) {
+		String sql = "INSERT INTO boards VALUES(BOARDS_SEQ.NEXTVAL, ?, ?, ?,SYSDATE, DEFAULT)";
+		
+		jdbcTemplate.update(sql, memberNum, qVo.getQnaBoardTitle(), qVo.getQnaBoardContent());
+	}
+	
+	public void delQna(Long qnaBoardNum) {
+		String sql = "DELETE FROM BOARDS WHERE QNABOARDNUM = ?";
+		jdbcTemplate.update(sql, qnaBoardNum);
+	}
+	
+	public void updateQna(Long qnaBoardNum, QnaRegiVO qVo) {
+		String sql = "UPDATE BOARDS SET QNABOARDTITLE = ? , QNABOARDCONTENT = ? WHERE QNABOARDNUM = ?";
+		jdbcTemplate.update(sql, qVo.getQnaBoardTitle(), qVo.getQnaBoardContent(), qnaBoardNum);
 	}
 			
 

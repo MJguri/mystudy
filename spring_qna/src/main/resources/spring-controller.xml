@@ -24,10 +24,28 @@
 	<bean id="qnaList" class="mj.guri.controller.QnaListController">
 	</bean>
 	
+	<bean id="qnaDetail" class="mj.guri.controller.QnaDetailController">
+	</bean>
+	
 	<bean id="memberController" class="mj.guri.controller.MemberController">
 	</bean>
 	
-	<bean id="loginController" class="mj.guri.controller.LoginController">
+	<bean id="login" class="mj.guri.controller.LoginController">
+	</bean>
+	
+	<bean id="logout" class="mj.guri.controller.LogoutController">
+	</bean>
+	
+	<bean id="qnaRegi" class="mj.guri.controller.QnaRegiController">
+	</bean>
+	
+	<bean id="qnaModify" class="mj.guri.controller.QnaModifyController">
+	</bean>
+	
+	<bean id="adminPage" class="mj.guri.controller.AdminController">
+	</bean>
+	
+	<bean id="memberManage" class="mj.guri.controller.AdminMemberManageController">
 	</bean>
 	
 	

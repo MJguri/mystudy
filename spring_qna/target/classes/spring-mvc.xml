@@ -29,12 +29,17 @@
 		<constructor-arg ref="dataSource"/>
 	</bean>
 	
+	<bean id="qnaDetailDao" class="mj.guri.dao.QnaDetailDAO">
+		<constructor-arg ref="dataSource"/>
+	</bean>
+	
 	<bean id="memberDao" class="mj.guri.dao.MemberDAO">
 		<constructor-arg ref="dataSource"/>
 	</bean>
 	
 	<bean id="authService" class="mj.guri.service.AuthService"/>
-	<bean id="regiService" class="mj.guri.service.MemberRegiService"/>
+	<bean id="membRegiSvc" class="mj.guri.service.MemberRegiService"/>
+	<bean id="qnaRegiSvc" class="mj.guri.service.QnaRegiService"/>
 	
 	
 	

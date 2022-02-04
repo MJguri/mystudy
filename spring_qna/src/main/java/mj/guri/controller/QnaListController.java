@@ -11,7 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import mj.guri.dao.QnaDAO;
-import mj.guri.vo.BoardsListVO;
+import mj.guri.vo.AuthInfo;
+import mj.guri.vo.QnaVO;
 
 @Controller
 public class QnaListController {
@@ -22,6 +23,12 @@ public class QnaListController {
 	@RequestMapping("/")
 	public String qnaListShow(HttpServletRequest request, HttpSession session, Model model) {
 		
+		AuthInfo authInfo = (AuthInfo)session.getAttribute("authInfo");
+		if(authInfo != null) {
+			model.addAttribute("memberName", authInfo.getMemberName());
+			model.addAttribute("memberNum", authInfo.getMemberNum());
+		}
+		
 		String _section = request.getParameter("section");
 		String _pageNum = request.getParameter("pageNum");
 		
@@ -29,13 +36,13 @@ public class QnaListController {
 		int pageNum = Integer.parseInt((_pageNum==null)?"1":_pageNum);
 		
 		int totalCnt = dao.selectAllNumBoard();
-		List<BoardsListVO> list = dao.selectTargetBoard(section, pageNum);
+		List<QnaVO> list = dao.selectTargetBoard(section, pageNum);
 		
 		model.addAttribute("totalCnt", totalCnt);
 		model.addAttribute("section", section);
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("list", list);
-
+		
 		return "index";
 	}
 }

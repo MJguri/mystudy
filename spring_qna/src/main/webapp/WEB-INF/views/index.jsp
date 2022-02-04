@@ -14,8 +14,16 @@
 <body>
     <header>
         Mj_guri 
-        <input type="button" id="loginBtn" name="loginBtn" value="로그인" onclick="location.href='login'">
-        <input type="button" id="joinBtn" name="joinBtn" value="회원가입" onclick="location.href='memberRegi'">
+        <c:if test="${memberName == null }">
+        	<input type="button" id="loginBtn" name="loginBtn" value="로그인" onclick="location.href='login'">
+        	<input type="button" id="joinBtn" name="joinBtn" value="회원가입" onclick="location.href='memberRegi'">
+        </c:if>
+        
+        <c:if test="${memberName != null}">
+        	${memberName }님
+        	<input type="button" id="memberInfoBtn" name="memberInfoBtn" value="정보보기" onclick="location.href='<c:url value="/member/info/${memberNum}"/>'">
+        	<input type="button" id="logoutBtn" name="logoutBtn" value="로그아웃" onclick="location.href='logout'">
+        </c:if>
     </header>
 
     <section>
@@ -32,7 +40,7 @@
 			<c:forEach var="q" items="${list}">
 				<tr>
 					<td>${q.qnaBoardNum}</td>
-					<td>${q.qnaBoardTitle}</td>
+					<td><a href='<c:url value="/qna/detail/${q.qnaBoardNum}"/>'>${q.qnaBoardTitle}</a></td>
 					<td>${q.memberName}</td>
 					<td> <fmt:formatDate value="${q.qnaBoardRegdate}" pattern="yyyy-MM-dd"/>  </td>
 					<td>${q.qnaBoardCount}</td>
@@ -77,6 +85,9 @@
 			</c:choose>
 		</div>
 	</c:if>
+	<c:if test="${memberName != null }">
+       	<input type="button" id="qnaRegiBtn" name="qnaRegiBtn" value="QnA작성" onclick="location.href='qnaRegi'">
+    </c:if>
     
     </section>
 

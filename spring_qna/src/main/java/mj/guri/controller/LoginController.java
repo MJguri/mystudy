@@ -47,6 +47,11 @@ public class LoginController {
 			AuthInfo authInfo =  authService.authenticate(loginVO.getMemberId(), loginVO.getMemberPassword());
 			//로그인 정보를 기록할 세션 코드
 			session.setAttribute("authInfo", authInfo);
+			
+			if(loginVO.getMemberId().equals("admin")) {
+				return "redirect:/admin";
+			}
+			
 		}
 		catch(IdPasswordNotMatchingException e) {
 			//이메일이 없거나 비밀번호가 틀린 경우 
