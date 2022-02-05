@@ -27,7 +27,6 @@ public class QnaDetailController {
 		}
 		
 		QnaDetailVO qVo = dao.selectQnaDetail(qnaBoardNum);
-		
 				
 		model.addAttribute("qVo", qVo);
 		model.addAttribute("qnaBoardNum", qnaBoardNum);

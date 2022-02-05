@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../../../resources/CSS/index.css">
-<title>회원관리 페이지</title>
+<title>회원관리 수정페이지</title>
 </head>
 <body>
 	<header>
@@ -19,26 +19,38 @@
         
     </header>
 	<section>
-		회원관리 페이지 입니다.
+		회원관리 수정 페이지 입니다.
+		<form:form commandName="memberVO">
 		<table border="1">
 			<tr>
-				<th>번호</th>
-				<th>아이디</th>
-				<th>이름</th>
-				<th>수정</th>
-				<th>삭제</th>
+				<th colspan="2">
+				 	회원번호 : ${mVo.memberNum}
+				</th>
 			</tr>
-			<c:forEach var="m" items="${list}">
-				<tr>
-					<td>${m.memberNum}</td>
-					<td> <a href='<c:url value="/admin/memberdetail/${m.memberNum}"/>'>${m.memberId}</a></td>
-					<td>${m.memberName}</td>
-					<td><input type="button" value="수정" onclick="location.href='<c:url value="/admin/memberupdate/${m.memberNum}"/>'"></td>
-					<td><input type="button" value="삭제" onclick="location.href='<c:url value="/admin/memberdelete/${m.memberNum}"/>'"></td>
-				</tr>
-			</c:forEach>
+			<tr>
+				<th>회원아이디</th>
+				<td><form:input path="memberId" value="${mVo.memberId}"/> </td>
+			</tr>
+			<tr>
+				<th>회원이름</th>
+				<td><form:input path="memberName" value="${mVo.memberName}"/></td>
+			</tr>
+			<tr>
+				<th>이메일</th>
+				<td><form:input path="memberEmail" value="${mVo.memberEmail}"/></td>
+			</tr>
+			<tr>
+				<th>전화</th>
+				<td><form:input path="memberPhone" value="${mVo.memberPhone}"/></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="submit" value="수정하기">
+					<input type="button" value="목록보기">
+				</td>
+			</tr>
 		</table>
-		
+		</form:form>
 	</section>
 
     <footer>

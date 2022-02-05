@@ -2,7 +2,6 @@ package mj.guri.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -10,6 +9,7 @@ import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
+import mj.guri.vo.AdminQnaVO;
 import mj.guri.vo.QnaRegiVO;
 import mj.guri.vo.QnaVO;
 
@@ -37,6 +37,23 @@ public class QnaDAO {
 						return blVo;
 					}
 			};
+	
+	// 공통의 RowMapper 를 꺼내 봅시다.
+	private RowMapper<AdminQnaVO> _rowMapper =
+			new RowMapper<AdminQnaVO>() {
+					@Override
+					public AdminQnaVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+						AdminQnaVO aqVo = new AdminQnaVO(
+								rs.getInt("qnaBoardNum"),
+								rs.getString("qnaBoardTitle"),
+								rs.getString("memberName"),
+								rs.getTimestamp("qnaBoardRegdate"),
+								rs.getInt("qnaBoardCount"),
+								rs.getString("commentYn"));
+					
+						return aqVo;
+					}
+			};		
 	
 	public List<QnaVO> selectQnaList(){
 		String sql = "SELECT A.QNABOARDNUM, A.QNABOARDTITLE, B.MEMBERNAME, A.QNABOARDREGDATE, A.QNABOARDCOUNT FROM BOARDS A JOIN  MEMBERS B ON (A.MEMBERNUM = B.MEMBERNUM) ORDER BY A.QNABOARDNUM DESC"; 				  
@@ -78,6 +95,19 @@ public class QnaDAO {
 		String sql = "UPDATE BOARDS SET QNABOARDTITLE = ? , QNABOARDCONTENT = ? WHERE QNABOARDNUM = ?";
 		jdbcTemplate.update(sql, qVo.getQnaBoardTitle(), qVo.getQnaBoardContent(), qnaBoardNum);
 	}
-			
-
+	
+	public List<AdminQnaVO> selectAdminTargetBoard(int section, int pageNum){
+		String sql="SELECT * FROM (SELECT ROWNUM AS RN, QNABOARDNUM, QNABOARDTITLE, MEMBERNAME, QNABOARDREGDATE, QNABOARDCOUNT, COMMENTYN FROM (SELECT A.QNABOARDNUM, A.QNABOARDTITLE, B.MEMBERNAME, A.QNABOARDREGDATE, A.QNABOARDCOUNT, CASE WHEN C.QNABOARDNUM IS NULL THEN 'N' ELSE 'Y' END COMMENTYN FROM BOARDS A JOIN MEMBERS B ON (A.MEMBERNUM = B.MEMBERNUM) LEFT OUTER JOIN COMMENTS C ON(A.QNABOARDNUM= C.QNABOARDNUM) ORDER BY A.QNABOARDNUM DESC)) WHERE RN BETWEEN (?-1)*100 + (?-1)*10 +1 and (?-1)*100 + (?) * 10";
+		
+		List<AdminQnaVO> list = jdbcTemplate.query(sql, _rowMapper, section, pageNum, section, pageNum);
+		
+		return list;
+	}
+	
+	public void insertComments(Long qnaBoardNum, String comments) {
+		String sql="INSERT INTO comments VALUES(comments_seq.NEXTVAL, ?, ?, SYSDATE)";
+		
+		jdbcTemplate.update(sql, qnaBoardNum, comments);
+	}
+	
 }

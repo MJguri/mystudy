@@ -80,5 +80,22 @@ public class MemberDAO {
 				reg.getMemberEmail(),
 				reg.getMemberPhone());
 	}
+	
+	//회원 정보 수정하기
+	public void updateMember(MemberVO mVo) {
+		String sql = "UPDATE MEMBERS SET MEMBERID= ?, MEMBERNAME= ?, MEMBEREMAIL= ?, MEMBERPHONE= ? WHERE MEMBERNUM = ?";
+		jdbcTemplate.update(sql, 
+				mVo.getMemberId(),
+				mVo.getMemberName(),
+				mVo.getMemberEmail(),
+				mVo.getMemberPhone(),
+				mVo.getMemberNum());
+	}
+
+	//조인 테이블 삭제하는법 봐야함
+	public void deleteMember(Long memberNum2) {
+		//String sql = "DELETE"
+		
+	}
 
 }

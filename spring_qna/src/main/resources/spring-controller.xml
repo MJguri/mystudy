@@ -48,6 +48,9 @@
 	<bean id="memberManage" class="mj.guri.controller.AdminMemberManageController">
 	</bean>
 	
+	<bean id="qnaManage" class="mj.guri.controller.AdminQnaManageController">
+	</bean>
+	
 	
 <!-- 	<bean id="memberDao" class="mj.guri.dao.MemberDAO">
 		<constructor-arg ref="dataSource"/>
