@@ -14,14 +14,17 @@
 <body>
 	<header>
         Mj_guri 
-        ${memberName }님
-       	<input type="button" id="logoutBtn" name="logoutBtn" value="로그아웃" onclick="location.href='logout'">
+        ${authInfo.memberName }님
+       	<input type="button" id="logoutBtn" name="logoutBtn" value="로그아웃" onclick="location.href='<c:url value="/logout"/>'">
         
     </header>
 	<section>
-		관리자페이지입니다.
-		<input type="button" value="회원관리" onclick="location.href='<c:url value="/admin/memberManage"/>'">
-		<input type="button" value="게시물관리" onclick="location.href='<c:url value="/admin/qnaManage"/>'">
+		관리자페이지입니다.<br>
+		<div class="btnBox">
+			<input type="button" value="회원관리" onclick="location.href='<c:url value="/admin/memberManage"/>'">
+			|||||||||||||||||||
+			<input type="button" value="게시물관리" onclick="location.href='<c:url value="/admin/qnaManage"/>'">
+		</div>
 	</section>
 
 

@@ -12,16 +12,8 @@
 <body>
 	<header>
         Mj_guri 
-        <c:if test="${memberName == null }">
-        	<input type="button" id="loginBtn" name="loginBtn" value="로그인" onclick="location.href='<c:url value="/login"/>'">
-        	<input type="button" id="joinBtn" name="joinBtn" value="회원가입" onclick="location.href='<c:url value="/memberRegi"/>'">
-        </c:if>
-        
-        <c:if test="${memberName != null}">
-        	${memberName }님
-        	<input type="button" id="memberInfoBtn" name="memberInfoBtn" value="정보보기" onclick="location.href='<c:url value="/memberInfo"/>'">
-        	<input type="button" id="logoutBtn" name="logoutBtn" value="로그아웃" onclick="location.href='<c:url value="/logout"/>'">
-        </c:if>
+       	${authInfo.memberName }님
+       	<input type="button" id="logoutBtn" name="logoutBtn" value="로그아웃" onclick="location.href='<c:url value="/logout"/>'">
     </header>
     <section>
 		QnA 상세보기 관리페이지
@@ -53,11 +45,11 @@
 			</tr>
 			<tr>
 				<td>
-					<c:if test="${qVo.memberName == memberName}">
+					<c:if test="${qVo.memberName == authInfo.memberName}">
 						<input type="button" id="updateQna" name="updateQna" value="질문수정" onclick="location.href='<c:url value="/qna/updateQna/${qnaBoardNum}"/>'">
 						<input type="button" id="delQna" name="delQna" value="질문삭제" onclick="location.href='<c:url value="/qna/delQna/${qnaBoardNum}"/>'">
 					</c:if>
-					<input type="button" id="goList" name="goList" value="목록으로" onclick="location.href='<c:url value="/"/>'">
+					<input type="button" id="goList" name="goList" value="목록으로" onclick="location.href='<c:url value="/admin/qnaManage"/>'">
 				</td>
 			</tr>
 		</table>
@@ -66,8 +58,8 @@
 		<c:choose>
 
 			<c:when test="${qVo.commentContent == null}">
-				<form action="<c:url value="/admin/regiComment"/>" method="POST">
-					<textarea id="comments" name="comments"></textarea>
+				<form class="formBox" action="<c:url value="/admin/regiComment"/>" method="POST">
+					<textarea id="comments" name="comments"></textarea><br>
 					<input type="hidden" id="qnaBoardNum" name="qnaBoardNum" value="${qnaBoardNum}">
 					<input type="submit" value="답변등록">
 				</form>

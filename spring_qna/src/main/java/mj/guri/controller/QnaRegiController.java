@@ -21,11 +21,7 @@ public class QnaRegiController {
 	private QnaRegiService qnaRegiSvc;
 
 	@RequestMapping(value="/qnaRegi", method=RequestMethod.GET)
-	public String qnaRegiForm(QnaRegiVO qnaRegiVO, HttpSession session, Model model) {
-		AuthInfo authInfo = (AuthInfo)session.getAttribute("authInfo");
-		if(authInfo != null) {
-			model.addAttribute("memberName", authInfo.getMemberName());
-		}
+	public String qnaRegiForm(QnaRegiVO qnaRegiVO, Model model) {
 		
 		return "qna/qnaRegi";
 	}

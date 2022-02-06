@@ -2,8 +2,8 @@ package mj.guri.controller;
 
 import java.util.List;
 
+
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import mj.guri.dao.QnaDAO;
 import mj.guri.dao.QnaDetailDAO;
 import mj.guri.vo.AdminQnaVO;
-import mj.guri.vo.AuthInfo;
 import mj.guri.vo.QnaDetailVO;
 
 @Controller
@@ -28,13 +27,7 @@ public class AdminQnaManageController {
 	private QnaDetailDAO qdao;
 
 	@RequestMapping("/admin/qnaManage")
-	public String qnaManage(HttpServletRequest request, HttpSession session, Model model) {
-		
-		AuthInfo authInfo = (AuthInfo)session.getAttribute("authInfo");
-		if(authInfo != null) {
-			model.addAttribute("memberName", authInfo.getMemberName());
-			model.addAttribute("memberNum", authInfo.getMemberNum());
-		}
+	public String qnaManage(HttpServletRequest request, Model model) {
 		
 		String _section = request.getParameter("section");
 		String _pageNum = request.getParameter("pageNum");
@@ -54,12 +47,7 @@ public class AdminQnaManageController {
 	}
 	
 	@RequestMapping("/admin/detail/{qnaBoardNum}")
-	public String qnaDetail(@PathVariable("qnaBoardNum") Long qnaBoardNum,  HttpSession session, Model model) {
-		
-		AuthInfo authInfo = (AuthInfo)session.getAttribute("authInfo");
-		if(authInfo != null) {
-			model.addAttribute("memberName", authInfo.getMemberName());
-		}
+	public String qnaDetail(@PathVariable("qnaBoardNum") Long qnaBoardNum, Model model) {
 		
 		QnaDetailVO qVo = qdao.selectQnaDetail(qnaBoardNum);
 				

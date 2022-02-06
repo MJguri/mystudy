@@ -24,3 +24,19 @@ table{
 	margin: 0 auto;
 	border: 1px solid;
 }
+
+.pagingbody{
+	margin: 0 auto;
+	width: 50px;
+}
+
+textarea{
+	margin: 0 auto;
+	width:500px;
+	height: 100px;
+}
+
+.formBox{
+	margin: 0 auto;
+	width: 500px;
+}

@@ -14,8 +14,7 @@
 <body>
     <header>
         Mj_guri 
-        	${memberName }님
-        	<input type="button" id="memberInfoBtn" name="memberInfoBtn" value="정보보기" onclick="location.href='<c:url value="/member/info/${memberNum}"/>'">
+        	${authInfo.memberName }님
         	<input type="button" id="logoutBtn" name="logoutBtn" value="로그아웃" onclick="location.href='<c:url value="/logout"/>'">
     </header>
 
@@ -80,6 +79,7 @@
 			</c:choose>
 		</div>
 	</c:if>
+	<input type="button" id="goList" name="goList" value="관리자메인으로" onclick="location.href='<c:url value="/admin"/>'">
     </section>
 
     <footer>

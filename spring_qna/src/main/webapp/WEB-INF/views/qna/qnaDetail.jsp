@@ -12,13 +12,13 @@
 <body>
 	<header>
         Mj_guri 
-        <c:if test="${memberName == null }">
+        <c:if test="${authInfo.memberName == null }">
         	<input type="button" id="loginBtn" name="loginBtn" value="로그인" onclick="location.href='<c:url value="/login"/>'">
         	<input type="button" id="joinBtn" name="joinBtn" value="회원가입" onclick="location.href='<c:url value="/memberRegi"/>'">
         </c:if>
         
-        <c:if test="${memberName != null}">
-        	${memberName }님
+        <c:if test="${authInfo.memberName != null}">
+        	${authInfo.memberName }님
         	<input type="button" id="memberInfoBtn" name="memberInfoBtn" value="정보보기" onclick="location.href='<c:url value="/memberInfo"/>'">
         	<input type="button" id="logoutBtn" name="logoutBtn" value="로그아웃" onclick="location.href='<c:url value="/logout"/>'">
         </c:if>
@@ -53,7 +53,7 @@
 			</tr>
 			<tr>
 				<td>
-					<c:if test="${qVo.memberName == memberName}">
+					<c:if test="${qVo.memberName == authInfo.memberName}">
 						<input type="button" id="updateQna" name="updateQna" value="질문수정" onclick="location.href='<c:url value="/qna/updateQna/${qnaBoardNum}"/>'">
 						<input type="button" id="delQna" name="delQna" value="질문삭제" onclick="location.href='<c:url value="/qna/delQna/${qnaBoardNum}"/>'">
 					</c:if>

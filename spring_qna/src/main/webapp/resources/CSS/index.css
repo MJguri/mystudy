@@ -19,3 +19,19 @@ footer{
 	font-weight: bold;
 	text-align: center;
 }
+
+table{
+	margin: 0 auto;
+	border: 1px solid;
+}
+
+.pagingbody{
+	margin: 0 auto;
+	width: 50px;
+}
+
+.btnBox{
+	margin:0 auto;
+	width:300px;
+}
+

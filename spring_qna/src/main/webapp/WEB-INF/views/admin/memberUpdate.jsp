@@ -14,8 +14,8 @@
 <body>
 	<header>
         Mj_guri 
-        ${memberName }님
-       	<input type="button" id="logoutBtn" name="logoutBtn" value="로그아웃" onclick="<c:url value="/logout"/>">
+        ${authInfo.memberName }님
+       	<input type="button" id="logoutBtn" name="logoutBtn" value="로그아웃" onclick="location.href='<c:url value="/logout"/>'">
         
     </header>
 	<section>
@@ -46,7 +46,7 @@
 			<tr>
 				<td colspan="2">
 					<input type="submit" value="수정하기">
-					<input type="button" value="목록보기">
+					<input type="button" value="목록보기" onclick="location.href='<c:url value="/admin/memberManage"/>'">
 				</td>
 			</tr>
 		</table>

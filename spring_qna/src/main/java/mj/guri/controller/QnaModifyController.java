@@ -1,6 +1,5 @@
 package mj.guri.controller;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import mj.guri.dao.QnaDAO;
 import mj.guri.dao.QnaDetailDAO;
-import mj.guri.vo.AuthInfo;
 import mj.guri.vo.QnaDetailVO;
 import mj.guri.vo.QnaRegiVO;
 
@@ -25,12 +23,7 @@ public class QnaModifyController {
 	private QnaDetailDAO detailDao;
 	
 	@RequestMapping(value="/qna/updateQna/{qnaBoardNum}", method=RequestMethod.GET)
-	public String updateQnaForm(QnaRegiVO qnaRegiVO, @PathVariable("qnaBoardNum") Long qnaBoardNum, HttpSession session, Model model) {
-		
-		AuthInfo authInfo = (AuthInfo)session.getAttribute("authInfo");
-		if(authInfo != null) {
-			model.addAttribute("memberName", authInfo.getMemberName());
-		}
+	public String updateQnaForm(QnaRegiVO qnaRegiVO, @PathVariable("qnaBoardNum") Long qnaBoardNum, Model model) {
 		
 		QnaDetailVO qVo = detailDao.selectQnaDetail(qnaBoardNum);
 		
