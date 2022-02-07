@@ -83,5 +83,7 @@
 * 2022_02_06 spring QnA게시판
    * CSS 추가
    * 코드의 중복 제거 
-      * session을 이용하는 부분에서 불필요한 코드 발견 후    
+      * session을 이용하는 부분에서 불필요한 코드 발견 후
+* 2022_02_07 spring QnA 게시판
+   * jdbcTemplate 방식에서 Mybatis 방식으로 변경    
    
