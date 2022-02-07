@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd"
+	profile="real">
+
+	<!-- DB 연결을 위해서 연결 객체를 생성해야 함  => 커넥션풀(DataSource) -->
+	<bean class="com.mchange.v2.c3p0.ComboPooledDataSource" id="dataSource" destroy-method="close">
+		<property name="driverClass" value="oracle.jdbc.OracleDriver"/>
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@oracle.interstander.com:41521:XE"/>
+		<property name="user" value="green00"/>
+		<property name="password" value="4321"/>
+	</bean>
+</beans>

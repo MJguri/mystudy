@@ -1,15 +1,15 @@
 package mj.guri.vo;
 
-public class QnaRegiVO {
+public class QnaUpdateVO {
 	private String qnaBoardTitle;
 	private String qnaBoardContent;
-	private int memberNum;
+	private Long qnaBoardNum;
 	
-	public int getMemberNum() {
-		return memberNum;
+	public Long getQnaBoardNum() {
+		return qnaBoardNum;
 	}
-	public void setMemberNum(int memberNum) {
-		this.memberNum = memberNum;
+	public void setQnaBoardNum(Long qnaBoardNum) {
+		this.qnaBoardNum = qnaBoardNum;
 	}
 	public String getQnaBoardTitle() {
 		return qnaBoardTitle;

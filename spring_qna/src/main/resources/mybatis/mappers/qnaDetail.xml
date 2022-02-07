@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!--  실제 쿼리를 작성하기 위한 부분 -->
+<mapper namespace="mybatis.mapper.qnaDetail">
+	
+	<resultMap type="qnaDetailVO" id="qdVo">
+		<result column="qnaBoardTitle" property="qnaBoardTitle"/>
+		<result column="qnaBoardRegdate" property="qnaBoardRegdate"/>
+		<result column="memberName" property="memberName"/>
+		<result column="qnaBoardCount" property="qnaBoardCount"/>
+		<result column="qnaBoardContent" property="qnaBoardContent"/>
+		<result column="commentContent" property="commentContent"/>
+		<result column="commentRegdate" property="commentRegdate"/>
+	</resultMap>
+	
+	<!-- 반복적으로 나오는 쿼리를 묶어서 처리  -->
+	<sql id="selectAllMember">
+		SELECT * FROM MEMBERS
+	</sql>
+
+	<select id="selectQnaDetail" resultMap="qdVo" parameterType="Long">
+		SELECT A.QNABOARDTITLE, A.QNABOARDREGDATE, B.MEMBERNAME, A.QNABOARDCOUNT, A.QNABOARDCONTENT, C.COMMENTCONTENT, C.COMMENTREGDATE 
+		  FROM BOARDS A JOIN MEMBERS B ON (A.MEMBERNUM = B.MEMBERNUM) LEFT OUTER JOIN COMMENTS C ON (A.QNABOARDNUM = C.QNABOARDNUM) WHERE A.QNABOARDNUM = #{qnaBoardNum}
+	</select>
+
+
+</mapper>

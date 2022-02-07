@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+<context:property-placeholder location="classpath:notImportant/db.properties"/>
+<!-- 첫번째 빈  : 데이터 소스(커넥션 풀)-->
+	<!-- DB 연결을 위해서 연결 객체를 생성해야 함  => 커넥션풀(DataSource) -->
+	<bean class="com.mchange.v2.c3p0.ComboPooledDataSource" id="dataSource" >
+		<property name="driverClass" value="${db.driver}"/>
+		<property name="jdbcUrl" value="${db.jdbcUrl}"/>
+		<property name="user" value="${db.user}"/>
+		<property name="password" value="${db.password}"/>
+	</bean>
+
+<!-- 두번째 빈  : SqlSessionFactory-->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:mybatis/config/mybatisConfig.xml"/>
+		<property name="mapperLocations" value="classpath*:mybatis/mappers/*.xml"/>
+	</bean>
+
+<!-- 세번째 빈  : SqlSession-->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory"/>
+	</bean>
+<!-- 네번째 빈  : MemberDAO-->
+	<bean id="dao" class="mj.guri.dao.MemberDAO">
+		<property name="sqlSession" ref="sqlSession"/>
+	</bean>
+	
+	<bean id="qdao" class="mj.guri.dao.QnaDAO">
+		<property name="sqlSession" ref="sqlSession"/>
+	</bean>
+	
+	<bean id="qddao" class="mj.guri.dao.QnaDetailDAO">
+		<property name="sqlSession" ref="sqlSession"/>
+	</bean>
+	
+	<!--  추가 -->
+
+</beans>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!--  실제 쿼리를 작성하기 위한 부분 -->
+<mapper namespace="mybatis.mapper.qna">
+	
+	<resultMap type="qnaVO" id="qVo">
+		<result column="qnaBoardNum" property="qnaBoardNum"/>
+		<result column="qnaBoardTitle" property="qnaBoardTitle"/>
+		<result column="memberName" property="memberName"/>
+		<result column="qnaBoardRegdate" property="qnaBoardRegdate"/>
+		<result column="qnaBoardCount" property="qnaBoardCount"/>
+	</resultMap>
+	
+	<resultMap type="adminQnaVO" id="aqVo">
+		<result column="qnaBoardNum" property="qnaBoardNum"/>
+		<result column="qnaBoardTitle" property="qnaBoardTitle"/>
+		<result column="memberName" property="memberName"/>
+		<result column="qnaBoardRegdate" property="qnaBoardRegdate"/>
+		<result column="qnaBoardCount" property="qnaBoardCount"/>
+		<result column="commentYn" property="commentYn"/>
+	</resultMap>
+
+
+	<select id="selectQnaList" resultMap="qVo">
+		SELECT A.QNABOARDNUM, A.QNABOARDTITLE, B.MEMBERNAME, A.QNABOARDREGDATE, A.QNABOARDCOUNT 
+		  FROM BOARDS A JOIN  MEMBERS B ON (A.MEMBERNUM = B.MEMBERNUM) ORDER BY A.QNABOARDNUM DESC
+	</select>
+	
+	<select id="selectAllNumBoard" resultType="int">
+		SELECT COUNT(*) 
+		  FROM BOARDS A JOIN  MEMBERS B ON (A.MEMBERNUM = B.MEMBERNUM)
+	</select>
+	
+	<select id="selectTargetBoard" resultMap="qVo" parameterType="hashMap">
+		SELECT * FROM (SELECT ROWNUM AS RN, QNABOARDNUM, QNABOARDTITLE, MEMBERNAME, QNABOARDREGDATE, QNABOARDCOUNT 
+		                 FROM (SELECT A.QNABOARDNUM, A.QNABOARDTITLE, B.MEMBERNAME, A.QNABOARDREGDATE, A.QNABOARDCOUNT 
+		                         FROM BOARDS A JOIN MEMBERS B ON (A.MEMBERNUM = B.MEMBERNUM) ORDER BY A.QNABOARDNUM DESC)) 
+		 WHERE RN BETWEEN (#{section}-1)*100 + (#{pageNum}-1)*10 +1 and (#{section}-1)*100 + (#{pageNum}) * 10
+	</select>
+	
+	<insert id="insertQna" parameterType="qnaRegiVO">
+		INSERT INTO boards 
+		VALUES(BOARDS_SEQ.NEXTVAL, #{memberNum}, #{qnaBoardTitle}, #{qnaBoardContent}, SYSDATE, DEFAULT)
+	</insert>
+	
+	<delete id="delQna" parameterType="Long">
+		DELETE FROM BOARDS WHERE QNABOARDNUM = #{qnaBoardNum}
+	</delete>
+	
+	<update id="updateQna" parameterType="qnaUpdateVO">
+		UPDATE BOARDS 
+		   SET QNABOARDTITLE = #{qnaBoardTitle}, QNABOARDCONTENT = #{qnaBoardContent} WHERE QNABOARDNUM = #{qnaBoardNum}
+	</update>
+	
+	<select id="selectAdminTargetBoard" resultMap="aqVo" parameterType="hashMap">
+		SELECT * FROM (SELECT ROWNUM AS RN, QNABOARDNUM, QNABOARDTITLE, MEMBERNAME, QNABOARDREGDATE, QNABOARDCOUNT, COMMENTYN 
+		                 FROM (SELECT A.QNABOARDNUM, A.QNABOARDTITLE, B.MEMBERNAME, A.QNABOARDREGDATE, A.QNABOARDCOUNT, CASE WHEN C.QNABOARDNUM IS NULL THEN 'N' ELSE 'Y' END COMMENTYN 
+		                         FROM BOARDS A JOIN MEMBERS B ON (A.MEMBERNUM = B.MEMBERNUM) LEFT OUTER JOIN COMMENTS C ON(A.QNABOARDNUM= C.QNABOARDNUM) ORDER BY A.QNABOARDNUM DESC)) 
+		 WHERE RN BETWEEN (#{section}-1)*100 + (#{pageNum}-1)*10 +1 and (#{section}-1)*100 + (#{pageNum}) * 10
+	</select>
+	
+	<insert id="insertComments" parameterType="insertComVO">
+		INSERT INTO comments 
+		VALUES(comments_seq.NEXTVAL, #{qnaBoardNum}, #{comments}, SYSDATE)
+	</insert>
+	
+	
+
+
+	
+
+
+</mapper>

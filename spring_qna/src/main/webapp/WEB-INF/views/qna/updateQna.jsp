@@ -28,7 +28,7 @@
     <section>
 		QnA게시판 수정하기
 		
-		<form:form commandName="qnaRegiVO">
+		<form:form commandName="qnaUpdateVO">
 		<table>
 			<tr>
 				<td>

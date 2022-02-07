@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!--  실제 쿼리를 작성하기 위한 부분 -->
+<mapper namespace="mybatis.mapper.member">
+	
+	<resultMap type="memberVO" id="mVo">
+		<result column="memberNum" property="memberNum"/>
+		<result column="memberId" property="memberId"/>
+		<result column="memberPassword" property="memberPassword"/>
+		<result column="memberName" property="memberName"/>
+		<result column="memberEmail" property="memberEmail"/>
+		<result column="memberPhone" property="memberPhone"/>
+	</resultMap>
+	
+
+	<!-- 반복적으로 나오는 쿼리를 묶어서 처리  -->
+	<sql id="selectAllMember">
+		SELECT * FROM MEMBERS
+	</sql>
+
+	<select id="selectAll" resultMap="mVo">
+		<!-- SELECT * FROM members -->
+		<include refid="selectAllMember" />
+	</select>
+
+	 <select id="selectById" resultMap="mVo" parameterType="String">
+		<!-- SELECT * FROM members -->
+		<include refid="selectAllMember" />
+		WHERE memberId=#{memberId}
+	</select>
+	
+	 <select id="selectByNum" resultMap="mVo" parameterType="Long">
+		<!-- SELECT * FROM members -->
+		<include refid="selectAllMember" />
+		WHERE memberNum=#{memberNum}
+	</select>
+	
+	<insert id="insertMember" parameterType="memberRegiVO">
+		INSERT INTO members
+		 VALUES(MEMBERS_SEQ.NEXTVAL, #{memberId},#{memberPassword},#{memberName},#{memberEmail},#{memberPhone})
+	</insert>
+	
+	<update id="updateMember" parameterType="memberVO">
+	    UPDATE MEMBERS 
+	    SET MEMBERID=#{memberId}, MEMBERNAME= #{memberName}, MEMBEREMAIL= #{memberEmail}, MEMBERPHONE= #{memberPhone}
+	    WHERE MEMBERNUM=#{memberNum}
+	</update>
+		
+	<select id="selectCount" resultType="int">
+		SELECT count(*) FROM members
+	</select>
+
+
+	
+
+
+</mapper>

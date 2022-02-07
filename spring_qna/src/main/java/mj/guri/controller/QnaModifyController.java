@@ -12,6 +12,7 @@ import mj.guri.dao.QnaDAO;
 import mj.guri.dao.QnaDetailDAO;
 import mj.guri.vo.QnaDetailVO;
 import mj.guri.vo.QnaRegiVO;
+import mj.guri.vo.QnaUpdateVO;
 
 @Controller
 public class QnaModifyController {
@@ -23,7 +24,7 @@ public class QnaModifyController {
 	private QnaDetailDAO detailDao;
 	
 	@RequestMapping(value="/qna/updateQna/{qnaBoardNum}", method=RequestMethod.GET)
-	public String updateQnaForm(QnaRegiVO qnaRegiVO, @PathVariable("qnaBoardNum") Long qnaBoardNum, Model model) {
+	public String updateQnaForm(QnaUpdateVO qnaUpdateVO, @PathVariable("qnaBoardNum") Long qnaBoardNum, Model model) {
 		
 		QnaDetailVO qVo = detailDao.selectQnaDetail(qnaBoardNum);
 		
@@ -34,9 +35,9 @@ public class QnaModifyController {
 	}
 	
 	@RequestMapping(value="/qna/updateQna/{qnaBoardNum}", method=RequestMethod.POST)
-	public String updateQna(QnaRegiVO qnaRegiVO, @PathVariable("qnaBoardNum") Long qnaBoardNum) {
+	public String updateQna(QnaUpdateVO qnaUpdateVO, @PathVariable("qnaBoardNum") Long qnaBoardNum) {
 		
-		dao.updateQna(qnaBoardNum, qnaRegiVO);
+		dao.updateQna(qnaBoardNum, qnaUpdateVO);
 		return "redirect:/";
 	}
 	
