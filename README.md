@@ -85,5 +85,10 @@
    * 코드의 중복 제거 
       * session을 이용하는 부분에서 불필요한 코드 발견 후
 * 2022_02_07 spring QnA 게시판
-   * jdbcTemplate 방식에서 Mybatis 방식으로 변경    
+   * jdbcTemplate 방식에서 Mybatis 방식으로 변경
+* 2022_02_08 JAVA 공부
+   * equals 메소드와 == 연산자 비교
+      * https://gury-dev.tistory.com/9
+   * JVM 구조
+      * https://gury-dev.tistory.com/10   
    
